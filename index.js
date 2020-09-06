@@ -1,196 +1,25 @@
-// webp
-
-(() => {
-  const body = document.documentElement;
-  console.log(body);
-  body.classList.remove('no-webp');
-  const webP = new Image();
-  webP.src = 'data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAACyAgCdASoCAAIALmk0mk0iIiIiIgBoSygABc6WWgAA/veff/0PP8bA//LwYAAA';
-
-  webP.onerror = () => {
-    if (webP.height === 2) {
-      body.classList.add('webp');
-    } else {
-      body.classList.add('no-webp');
-    }
-  };
-
-  webP.onload = webP.onerror;
-})();
-
-// header
-
-(() => {
-  const content = {
-    browsers: {
-      title: 'Браузеры',
-      list: [
-        {
-          imgName: 'logo-firefox',
-          description: 'Firefox',
-        },
-        {
-          imgName: 'logo-firefox-dev',
-          description: 'Firefox Developer Edition',
-        },
-        {
-          imgName: 'logo-firefox-nightly',
-          description: 'Firefox Nightly',
-        },
-        {
-          imgName: 'logo-microsoft-edge',
-          description: 'Microsoft Edge',
-        },
-        {
-          imgName: 'logo-microsoft-edge-canary',
-          description: 'Microsoft Edge Сanary',
-        },
-        {
-          imgName: 'logo-google-chrome',
-          description: 'Google Chrome',
-        },
-        {
-          imgName: 'logo-google-chrome-canary',
-          description: 'Google Chrome Сanary',
-        },
-        {
-          imgName: 'logo-opera',
-          description: 'Opera',
-        },
-        {
-          imgName: 'logo-microsoft-edge-html',
-          description: 'Microsoft Edge на EdgeHTML',
-        },
-      ],
-    },
-    editors: {
-      title: 'Редакторы кода',
-      list: [
-        {
-          imgName: 'logo-visual_studio_code',
-          description: 'Visual Studio Code',
-        },
-        {
-          imgName: 'logo-PhpStorm',
-          description: 'PhpStorm',
-        },
-        {
-          imgName: 'logo-atom',
-          description: 'Atom',
-        },
-        {
-          imgName: 'logo-sublime-text',
-          description: 'Sublime Text',
-        },
-      ],
-    },
-  };
-
-  const heading = document.querySelector('.section-list__title');
-  const containerList = document.querySelector('.section-list__list');
-  const links = document.querySelectorAll('.header__link');
-  const linkActiveHref = document.querySelector('.header__link--active').getAttribute('href');
-
-  const template = ({ imgName, description }) => {
-    const li = document.createElement('li');
-    li.classList.add('section-list__list-item');
-
-    const figure = document.createElement('figure');
-    figure.classList.add('section-list__list-figure');
-
-    const div = document.createElement('div');
-    div.classList.add('section-list__list-img-wrapper');
-
-    const picture = document.createElement('picture');
-
-    const source = document.createElement('source');
-    source.srcset = `img/${imgName}.webp`;
-    source.type = 'image/webp';
-
-    const img = document.createElement('img');
-    img.classList.add('section-list__list-img');
-    img.src = `img/${imgName}.png`;
-    img.alt = `Логотип ${description}`;
-
-    const figcaption = document.createElement('figcaption');
-    figcaption.classList.add('section-list__list-figcaption');
-    figcaption.textContent = description;
-
-    picture.append(source);
-    picture.append(img);
-    div.append(picture);
-    figure.append(div);
-    figure.append(figcaption);
-    li.append(figure);
-
-    return li;
-  };
-
-  const render = ({ title, list }) => {
-    heading.textContent = title;
-    containerList.innerHTML = '';
-    const fragment = document.createDocumentFragment();
-    list.forEach((item) => {
-      const li = template(item);
-      fragment.append(li);
-    });
-    containerList.append(fragment);
-  };
-
-  const handler = (e) => {
-    e.preventDefault();
-    const item = e.target;
-    if (!item.classList.contains('header__link--active')) {
-      const itemHref = item.getAttribute('href');
-      links.forEach((link) => {
-        link.classList.remove('header__link--active');
-      });
-      item.classList.add('header__link--active');
-      render(content[itemHref]);
-    }
-  };
-
-  links.forEach((link) => {
-    link.addEventListener('click', handler);
-  });
-
-  // render(content[linkActiveHref]);
-})();
-
-(() => {
-  const button = document.querySelector('.header__burger');
-  const nav = document.querySelector('.header__nav');
-  const body = document.querySelector('.page__body');
-
-  const closeNav = (e) => {
-    e.stopPropagation();
-    if (!(!!e.target.closest('.header__nav')
-      || e.target.classList.contains('header__nav'))) {
-      nav.classList.remove('header__nav--open');
-      body.classList.remove('page__body--overflow');
-    }
-  };
-
-  const openNav = (e) => {
-    e.stopPropagation();
-    nav.classList.toggle('header__nav--open');
-    body.classList.toggle('page__body--overflow');
-    if (nav.classList.contains('header__nav--open')) {
-      body.addEventListener('click', closeNav);
-    } else {
-      body.removeEventListener('click', closeNav);
-    }
-  };
-
-  button.addEventListener('click', openNav);
-})();
-
-// main
-
-(() => {
-  const a = 2;
-  const b = 4;
-  const result = b + a;
-  console.log(result);
-})();
-
+!function(e){var t={};function o(i){if(t[i])return t[i].exports;var n=t[i]={i:i,l:!1,exports:{}};return e[i].call(n.exports,n,n.exports,o),n.l=!0,n.exports}o.m=e,o.c=t,o.d=function(e,t,i){o.o(e,t)||Object.defineProperty(e,t,{enumerable:!0,get:i})},o.r=function(e){"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(e,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(e,"__esModule",{value:!0})},o.t=function(e,t){if(1&t&&(e=o(e)),8&t)return e;if(4&t&&"object"==typeof e&&e&&e.__esModule)return e;var i=Object.create(null);if(o.r(i),Object.defineProperty(i,"default",{enumerable:!0,value:e}),2&t&&"string"!=typeof e)for(var n in e)o.d(i,n,function(t){return e[t]}.bind(null,n));return i},o.n=function(e){var t=e&&e.__esModule?function(){return e.default}:function(){return e};return o.d(t,"a",t),t},o.o=function(e,t){return Object.prototype.hasOwnProperty.call(e,t)},o.p="",o(o.s="./src/js/index.js")}({"./src/blocks/header/header.js":
+/*!*************************************!*\
+  !*** ./src/blocks/header/header.js ***!
+  \*************************************/
+/*! exports provided: default */function(e,t,o){"use strict";o.r(t);var i=o(/*! ../../js/global/padding-scroll */"./src/js/global/padding-scroll.js");t.default=()=>{const e=Object(i.default)(),t=document.querySelector(".header__burger"),o=document.querySelector(".header__nav"),n=document.querySelector(".page__body"),s=t=>{t.stopPropagation(),t.target.classList.contains("header__nav")||(o.classList.remove("header__nav--open"),n.classList.remove("page__body--overflow"),e.removePadding(),n.removeEventListener("click",s))};t.addEventListener("click",t=>{t.stopPropagation(),o.classList.toggle("header__nav--open"),o.classList.contains("header__nav--open")?(e.addPadding(),n.classList.add("page__body--overflow"),n.addEventListener("click",s)):(n.classList.remove("page__body--overflow"),e.removePadding(),n.removeEventListener("click",s))})}},"./src/blocks/main/main.js":
+/*!*********************************!*\
+  !*** ./src/blocks/main/main.js ***!
+  \*********************************/
+/*! exports provided: default */function(e,t,o){"use strict";o.r(t),t.default=()=>{console.log(6)}},"./src/blocks/section-list/section-list.js":
+/*!*************************************************!*\
+  !*** ./src/blocks/section-list/section-list.js ***!
+  \*************************************************/
+/*! exports provided: default */function(e,t,o){"use strict";o.r(t),t.default=()=>{const e={browsers:{title:"Браузеры",list:[{imgName:"logo-firefox",description:"Firefox"},{imgName:"logo-firefox-dev",description:"Firefox Developer Edition"},{imgName:"logo-firefox-nightly",description:"Firefox Nightly"},{imgName:"logo-microsoft-edge",description:"Microsoft Edge"},{imgName:"logo-microsoft-edge-canary",description:"Microsoft Edge Сanary"},{imgName:"logo-google-chrome",description:"Google Chrome"},{imgName:"logo-google-chrome-canary",description:"Google Chrome Сanary"},{imgName:"logo-opera",description:"Opera"},{imgName:"logo-microsoft-edge-html",description:"Microsoft Edge на EdgeHTML"}]},editors:{title:"Редакторы кода",list:[{imgName:"logo-visual_studio_code",description:"Visual Studio Code"},{imgName:"logo-PhpStorm",description:"PhpStorm"},{imgName:"logo-atom",description:"Atom"},{imgName:"logo-sublime-text",description:"Sublime Text"}]}},t=document.querySelector(".section-list__title"),o=document.querySelector(".section-list__list"),i=document.querySelectorAll(".header__link"),n=({title:e,list:i})=>{t.textContent=e,o.innerHTML="";const n=[];i.forEach(e=>{const t=(({imgName:e,description:t})=>{const o=document.createElement("li");o.classList.add("section-list__list-item");const i=document.createElement("figure");i.classList.add("section-list__list-figure");const n=document.createElement("div");n.classList.add("section-list__list-img-wrapper");const s=document.createElement("picture"),r=document.createElement("source");r.srcset="img/".concat(e,".webp"),r.type="image/webp";const c=document.createElement("img");c.classList.add("section-list__list-img"),c.src="img/".concat(e,".png"),c.alt="Логотип ".concat(t);const a=document.createElement("figcaption");return a.classList.add("section-list__list-figcaption"),a.textContent=t,s.append(r),s.append(c),n.append(s),i.append(n),i.append(a),o.append(i),o})(e);n.push(t)}),o.append(...n)},s=t=>{t.preventDefault();const o=t.target;if(!o.classList.contains("header__link--active")){const t=o.getAttribute("href");i.forEach(e=>{e.classList.remove("header__link--active")}),o.classList.add("header__link--active"),n(e[t])}};i.forEach(e=>{e.addEventListener("click",s)})}},"./src/js/global/padding-scroll.js":
+/*!*****************************************!*\
+  !*** ./src/js/global/padding-scroll.js ***!
+  \*****************************************/
+/*! exports provided: default */function(e,t,o){"use strict";o.r(t),t.default=()=>({addPadding(){document.querySelectorAll(".js-scroll").forEach(e=>{const{paddingRight:t}=getComputedStyle(e);e.style.paddingRight="".concat(parseFloat(t)+window.innerWidth-document.documentElement.clientWidth,"px")})},removePadding(){document.querySelectorAll(".js-scroll").forEach(e=>{const{paddingRight:t}=getComputedStyle(e);e.style.paddingRight="".concat(parseFloat(t)-(window.innerWidth-document.documentElement.clientWidth),"px")})}})},"./src/js/global/webp.js":
+/*!*******************************!*\
+  !*** ./src/js/global/webp.js ***!
+  \*******************************/
+/*! exports provided: default */function(e,t,o){"use strict";o.r(t),t.default=()=>{const e=document.documentElement,t=new Image;t.src="data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAACyAgCdASoCAAIALmk0mk0iIiIiIgBoSygABc6WWgAA/veff/0PP8bA//LwYAAA",t.onload=()=>{2===t.height?e.classList.add("webp"):e.classList.add("no-webp")},t.onerror=()=>{e.classList.add("no-webp")}}},"./src/js/index.js":
+/*!*************************!*\
+  !*** ./src/js/index.js ***!
+  \*************************/
+/*! no exports provided */function(e,t,o){"use strict";o.r(t);var i=o(/*! ./global/webp */"./src/js/global/webp.js"),n=o(/*! ../blocks/header/header */"./src/blocks/header/header.js"),s=o(/*! ../blocks/main/main */"./src/blocks/main/main.js"),r=o(/*! ../blocks/section-list/section-list */"./src/blocks/section-list/section-list.js");Object(i.default)(),Object(n.default)(),Object(s.default)(),Object(r.default)(),console.log(16)}});
